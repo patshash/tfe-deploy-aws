@@ -3,6 +3,12 @@ variable "friendly_name_prefix" {
   type        = string
 }
 
+variable "enable_deletion_protection" {
+  description = "Enable deletion protection on the ALB"
+  type        = bool
+  default     = true
+}
+
 variable "vpc_id" {
   description = "VPC ID where TFE will be deployed"
   type        = string

@@ -3,6 +3,12 @@ variable "friendly_name_prefix" {
   type        = string
 }
 
+variable "enable_deletion_protection" {
+  description = "Enable deletion protection on the RDS instance"
+  type        = bool
+  default     = true
+}
+
 variable "db_instance_class" {
   description = "RDS instance class"
   type        = string

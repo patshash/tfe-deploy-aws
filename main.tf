@@ -198,12 +198,13 @@ module "networking" {
 module "database" {
   source = "./modules/database"
 
-  friendly_name_prefix = var.friendly_name_prefix
-  db_instance_class    = var.db_instance_class
-  db_subnet_group_name = module.networking.db_subnet_group_name
-  security_group_ids   = [module.networking.database_security_group_id]
-  kms_key_arn          = local.kms_key_arn
-  tags                 = local.common_tags
+  friendly_name_prefix       = var.friendly_name_prefix
+  db_instance_class          = var.db_instance_class
+  db_subnet_group_name       = module.networking.db_subnet_group_name
+  security_group_ids         = [module.networking.database_security_group_id]
+  kms_key_arn                = local.kms_key_arn
+  enable_deletion_protection = var.enable_deletion_protection
+  tags                       = local.common_tags
 }
 
 #------------------------------------------------------
@@ -237,19 +238,20 @@ module "object_storage" {
 module "compute" {
   source = "./modules/compute"
 
-  friendly_name_prefix      = var.friendly_name_prefix
-  vpc_id                    = module.networking.vpc_id
-  private_subnet_ids        = module.networking.private_subnet_ids
-  public_subnet_ids         = module.networking.public_subnet_ids
-  alb_security_group_id     = module.networking.alb_security_group_id
-  tfe_security_group_id     = module.networking.tfe_security_group_id
-  instance_type             = var.instance_type
-  asg_min_size              = var.asg_min_size
-  asg_max_size              = var.asg_max_size
-  tfe_hostname              = var.tfe_hostname
-  route53_zone_name         = var.route53_zone_name
-  tfe_user_data             = local.tfe_user_data
-  iam_instance_profile_name = aws_iam_instance_profile.tfe.name
-  kms_key_arn               = local.kms_key_arn
-  tags                      = local.common_tags
+  friendly_name_prefix       = var.friendly_name_prefix
+  vpc_id                     = module.networking.vpc_id
+  private_subnet_ids         = module.networking.private_subnet_ids
+  public_subnet_ids          = module.networking.public_subnet_ids
+  alb_security_group_id      = module.networking.alb_security_group_id
+  tfe_security_group_id      = module.networking.tfe_security_group_id
+  instance_type              = var.instance_type
+  asg_min_size               = var.asg_min_size
+  asg_max_size               = var.asg_max_size
+  tfe_hostname               = var.tfe_hostname
+  route53_zone_name          = var.route53_zone_name
+  tfe_user_data              = local.tfe_user_data
+  iam_instance_profile_name  = aws_iam_instance_profile.tfe.name
+  kms_key_arn                = local.kms_key_arn
+  enable_deletion_protection = var.enable_deletion_protection
+  tags                       = local.common_tags
 }
