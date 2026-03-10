@@ -67,7 +67,7 @@ resource "aws_lb" "this" {
   subnets            = var.public_subnet_ids
 
   drop_invalid_header_fields = true
-  enable_deletion_protection = true
+  enable_deletion_protection = var.enable_deletion_protection
 
   tags = merge(var.tags, {
     Name = "${var.friendly_name_prefix}-tfe-alb"

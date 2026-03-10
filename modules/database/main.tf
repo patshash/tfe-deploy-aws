@@ -60,8 +60,8 @@ resource "aws_db_instance" "this" {
   backup_window             = "03:00-04:00"
   maintenance_window        = "sun:04:00-sun:05:00"
   copy_tags_to_snapshot     = true
-  deletion_protection       = true
-  skip_final_snapshot       = false
+  deletion_protection       = var.enable_deletion_protection
+  skip_final_snapshot       = !var.enable_deletion_protection
   final_snapshot_identifier = "${var.friendly_name_prefix}-tfe-final"
 
   auto_minor_version_upgrade = true
