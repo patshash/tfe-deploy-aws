@@ -1,6 +1,10 @@
-# Provider configuration for the complete example.
-# This is where provider config lives — NOT in the root module.
+provider "aws" {
+  region = "ap-southeast-2"
 
-# provider "aws" {
-#   region = var.aws_region
-# }
+  default_tags {
+    tags = {
+      ManagedBy = "terraform"
+      Example   = "tfe-fdo-complete"
+    }
+  }
+}
